@@ -87,7 +87,8 @@
   display: grid;
   border-radius: 50%;
 
-  background: linear-gradient(
+  background:
+    linear-gradient(
         0deg,
         rgb(231 76 60 / 70%) 30%,
         transparent 0 70%,
@@ -186,4 +187,28 @@
 
 .iziToast-wrapper-topRight .iziToast {
   width: 432px !important;
+}
+.load-more {
+  display: block;
+  margin: 20px auto;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 125px;
+  height: 40px;
+
+  background: #4e75ff;
+
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+.hidden {
+  display: none;
 }
