@@ -66,6 +66,7 @@ async function onSearch(event) {
     });
   } finally {
     hideLoader();
+    loadMoreBtn.classList.add("hidden");
   }
 }
 
