@@ -7,6 +7,8 @@ import {
   clearGallery,
   showLoader,
   hideLoader,
+  showLoadMoreButton,
+  hideLoadMoreButton,
 } from "./js/render-functions";
 
 const form = document.querySelector(".form");
@@ -34,7 +36,7 @@ async function onSearch(event) {
   page = 1;
 
   clearGallery();
-  loadMoreBtn.classList.add("hidden");
+  showLoadMoreButton();
   showLoader();
   
 

@@ -64,3 +64,4 @@ export function showLoadMoreButton() {
 export function hideLoadMoreButton() {
   loadMoreBtn.classList.add("hidden");
 }
+
