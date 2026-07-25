@@ -1,7 +1,7 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-import { getImagesByQuery } from "./js/pixabay-api";
+import { getImagesByQuery, PER_PAGE } from "./js/pixabay-api";
 import {
   createGallery,
   clearGallery,
@@ -55,11 +55,18 @@ async function onSearch(event) {
 
     createGallery(data.hits);
 
-    const totalPages = Math.ceil(totalHits / 15);
+const totalPages = Math.ceil(totalHits / PER_PAGE);
 
-    if (page < totalPages) {
-      showLoadMoreButton();
-    }
+if (page < totalPages) {
+  showLoadMoreButton();
+} else {
+  hideLoadMoreButton();
+
+  iziToast.info({
+    message: "We're sorry, but you've reached the end of search results.",
+    position: "topRight",
+  });
+}
   } catch {
     iziToast.error({
       message: "Something went wrong",
@@ -73,13 +80,14 @@ async function onSearch(event) {
 loadMoreBtn.addEventListener("click", async () => {
   page++;
   showLoader();
+  hideLoadMoreButton();
 
   try {
     const data = await getImagesByQuery(currentQuery, page);
 
     createGallery(data.hits);
 
-    const totalPages = Math.ceil(totalHits / 15);
+    const totalPages = Math.ceil(totalHits / PER_PAGE);
 
     if (page >= totalPages) {
       hideLoadMoreButton();
@@ -88,7 +96,9 @@ loadMoreBtn.addEventListener("click", async () => {
         message: "We're sorry, but you've reached the end of search results.",
         position: "topRight",
       });
-    }
+    }else {
+  showLoadMoreButton();
+}
 
     scrollPage();
 
@@ -97,6 +107,8 @@ loadMoreBtn.addEventListener("click", async () => {
       message: "Error loading more images",
       position: "topRight",
     });
+
+    showLoadMoreButton();
   } finally {
     hideLoader();
   }
